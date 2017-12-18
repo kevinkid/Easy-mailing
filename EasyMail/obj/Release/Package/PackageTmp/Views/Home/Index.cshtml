@@ -1,0 +1,76 @@
+﻿<div ng-controller="mainCtrl">
+    <header class="steps">
+        <section id="slider">
+            <article class="slide">
+                <section ng-if="definitions" class="text">
+                    <h1 ng-if="definitions" id="word">
+                        {{ definitions[0].id }}
+                        <small ng-if="definitions">
+                            <i ng-if="definitions">({{definitions[0].language }})</i>
+                        </small>
+                    </h1>
+                    <b ng-if="definitions" id="grammer">Singular | Noun | pəːs(ə)n </b>
+                    <span ng-if="definitions" id="pronounce" class="ms-Icon ms-Icon--Volume3 x-hidden-focus" data-url="{{definitions[0].lexicalEntries[0].pronunciations[0].audioFile}}" ng-click="pronounce($event)"></span>
+                </section>
+            </article>
+        </section>
+    </header>
+    <main id="main">
+        <article>
+            <input title="Start typing then enter to search" type="text" name="searchDef" placeholder="Search ..." />
+            <span id="searchDef" class="ms-Icon ms-Icon--Search x-hidden-focus" ng-click="fetchDefinition($event)"></span>
+        </article>
+        <div ng-if="definitions">
+            <h2>Definitions</h2>
+            <br>
+            <ul id="definitions" ng-repeat="definition in definitions[0].lexicalEntries[0].entries">
+                <li>
+                    <p>
+                        {{definition.senses[0].definitions[0]}}
+                    </p>
+                    @*<br />
+                    <p class="synonyms">
+                        <b ng-repeat="synonym in synonyms">{{synonym.text}}</b>
+                    </p>
+                    <br />*@
+                    <p ng-repeat="subdefinition  in definition.senses[0].subsenses  track by $index">
+                        {{$index + 1}}.
+                        <small>{{subdefinition.definitions[0]}}</small>
+                    </p>
+                    <p id="other">
+                        <!-- Put synonyms,atonyms ... heres -->
+                    </p>
+                    <b>Usage :</b>
+                    <ul>
+                        <li class="example-list" ng-repeat="example in definition.senses[0].examples">
+                            {{example.text}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ms-MessageBar" ng-class="loading">
+                <div class="ms-MessageBar-content">
+                    <center>
+                        <div class="ms-MessageBar-text">
+                            {{notification.message}}
+                            <br />
+                            <a href="{{notification.link}}" class="ms-Link">help</a>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <a class="more_link" id="scientificDefLink" title="See scientific definition" target="_blank" href="{{definitions.scientificDefLink}}">{{definitions.scientificDefLink}}</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            Powered by
+            <a target="_blank" href="https://developer.oxforddictionaries.com/">Oxford University Press</a>.
+        </p>
+        <span title="send some love" class="ms-Icon ms-Icon--Heart" onclick="giveLove()"></span>
+    </footer>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ui.js"></script>
+<script type="text/javascript" src="/scripts/controllers/mainCtrl.js"></script>

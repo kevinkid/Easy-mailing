@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{020F0C7E-F23C-420A-B280-C06C176DBE59}|" NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EasyMail/Views/Home/Index.cshtml">
+    <Files>
+      <File FileName="EasyMail/Scripts/client.js" Line="19" Column="38" />
+      <File FileName="EasyMail/Views/Home/Index.cshtml" Line="20" Column="8" />
+      <File FileName="EasyMail/Views/Home/compose.cshtml" Line="39" Column="1" />
+      <File FileName="EasyMail/Controllers/HomeController.cs" Line="26" Column="2" />
+      <File FileName="EasyMail/Scripts/editor.js" Line="262" Column="1" />
+      <File FileName="EasyMail/Controllers/itemsController.cs" Line="1" Column="2" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="EasyMail" expanded="True">
+            <Node name="EasyMail" expanded="True">
+              <Node name="References" expanded="True">
+                <Node name="ASPNetSpell" selected="True" />
+              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Scripts" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.EasyMail PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

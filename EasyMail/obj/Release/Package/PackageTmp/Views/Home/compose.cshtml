@@ -1,0 +1,41 @@
+﻿<div>
+    <main id="main">
+        <div class="mailBody" style="margin-top:-20px;width:100%;height:500px;margin-top:30px;"></div>
+    </main>
+    <div ng-controller="composeCtrl" class="suggestionPopup" ispopup="1" tabindex="-1" parentids="(63)">
+        <div class="_uh_Q" style="padding: 3px 3px 5px 5px;background-color: #fff;">
+            <div>
+                <div ng-repeat="suggestion in suggestions track by $index" class="ms-font-s o365button" aria-labelledby="_ariaId_217">
+                    <span ng-if="suggestionIndex === $index" style="color: black;font-size: 8px;position: absolute;top: -1px;left: 95%;">{{$index + 1}}</span>
+                    <span ng-if="$index > 0" class="separator"></span>
+                    <span class="_fc_4 o365buttonLabel _fc_2" id="_ariaId_217">{{suggestion}}</span>
+                </div>
+                <div class="ms-font-s o365button suggestionClose" aria-labelledby="_ariaId_217" onclick="editor.hideSuggestions()">
+                    <span class="ms-Icon _fc_3 owaimg ms-fcl-tp _uh_U ms-Icon--ChromeClose ms-icon-font-size-14"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ui.js"></script>
+<script type="text/javascript" src="~/Content/monaco-editor/min/vs/loader.js"></script>
+<script type="text/javascript" src="/scripts/libs/BingSpeech.js"></script>
+<script type="text/javascript" src="/scripts/libs/aes.js"></script>
+<script type="text/javascript" src="~/Content/ASPNetSpellInclude/include.js"></script>
+<script type="text/javascript" src="~/Scripts/editor.js"></script>
+<script type="text/javascript" src="/scripts/controllers/composeCtrl.js"></script>
+<script>
+    onload = function () {
+        var message = '';
+        if (@ViewBag.editing) {
+            message = decryptMessage("@ViewBag.Message");
+        }
+        initEditor({ value: message }, (editor) => {
+            self.editor.editor = editor;
+            self.editor.suggestionPopup = $('.suggestionPopup');
+            initAutoCorrect();
+        })
+        loaded()
+    }
+</script>

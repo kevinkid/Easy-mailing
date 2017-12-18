@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, inline-scale=1">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css">
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.2.0/css/fabric.components.min.css" />
+    <script type="text/javascript" src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/js/fabric.min.js"></script>
+    @Styles.Render("~/Content/main.css")
+</head>
+
+<body ng-app="app" class="outlook">
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script type="text/javascript" src="~/Scripts/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/const.js"></script>
+    <script type="text/javascript" src="/scripts/utils.js"></script>
+
+    <script type="text/javascript">
+        !function () { "use strict"; function a() { function h() { for (var a = f; a >= e; a--)if (b.item(a).classList.contains("active")) return console.log("active:", a), a; return console.log("active:", e), b.item(e).classList.add("active"), e } function i(a) { a === e ? (d.style.display = "none", c.style.display = "inline") : a === f ? (c.style.display = "none", d.style.display = "inline") : (c.style.display = "inline", d.style.display = "inline") } function j(a) { var c = a + 1; return c >= f && (c = f), console.log(a, "->", c, "|", f), b.item(a).classList.remove("active"), b.item(c).classList.add("active"), c } function k(a) { var c = a - 1; return c <= e && (c = e), console.log(a, "->", c, "|", e), b.item(a).classList.remove("active"), b.item(c).classList.add("active"), c } var a = document.querySelector("#slider"), b = a.children, c = document.querySelector("#next"), d = document.querySelector("#previous"), e = 0, f = b.length - 1, g = h(); i(g), c.addEventListener("click", function () { var a = h(); a = j(a), b.item(a).classList.add("active"), i(a) }), d.addEventListener("click", function () { var a = h(); a = k(a), b.item(a).classList.add("active"), i(a) }) } document.onreadystatechange = function () { "interactive" == document.readyState && a() } }();
+    </script>
+</body>
+</html>

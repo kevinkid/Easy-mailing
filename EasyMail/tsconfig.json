@@ -1,0 +1,17 @@
+﻿{
+  "compilerOptions": {
+    "allowJs": false,
+    "noEmit": true
+  },
+  "exclude": [
+    "Content",
+    "lib"
+  ],
+  "typeAcquisition": {
+    "enable": true,
+    "include": [
+      "bootstrap",
+      "kendo-ui" //list libraries you are using here
+    ]
+  } 
+}

@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <ProjectGuid>{020F0C7E-F23C-420A-B280-C06C176DBE59}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EasyMail</RootNamespace>
+    <AssemblyName>EasyMail</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASPNetSpell">
+      <HintPath>..\..\..\..\Downloads\aspnetspell\ASPNetSpell\ASPNetSpell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\itemsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\main.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\const.js" />
+    <Content Include="Scripts\controllers\composeCtrl.js" />
+    <Content Include="Scripts\controllers\mainCtrl.js" />
+    <Content Include="Scripts\dictation.js" />
+    <Content Include="Scripts\editor.js" />
+    <Content Include="Scripts\libs\aes.js" />
+    <Content Include="Scripts\libs\angular.min.js" />
+    <Content Include="Scripts\libs\BingSpeech.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\monaco-editor\dev\vs\base\worker\workerMain.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\bat.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\coffee.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\cpp.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\csharp.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\css.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\dockerfile.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\fsharp.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\go.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\handlebars.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\html.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\ini.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\java.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\less.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\lua.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\markdown.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\msdax.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\objective-c.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\php.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\postiats.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\powershell.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\pug.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\python.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\r.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\razor.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\ruby.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\sb.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\scss.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\solidity.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\sql.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\swift.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\vb.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\xml.js" />
+    <Content Include="Content\monaco-editor\dev\vs\basic-languages\src\yaml.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\contrib\suggest\browser\media\String_16x.svg" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\contrib\suggest\browser\media\String_inverse_16x.svg" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.css" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.de.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.es.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.fr.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.hu.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.it.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.ja.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.ko.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.pt-br.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.ru.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.tr.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.zh-cn.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.nls.zh-tw.js" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\standalone\browser\quickOpen\symbol-sprite.svg" />
+    <Content Include="Content\monaco-editor\dev\vs\language\css\cssMode.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\css\cssWorker.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\html\htmlMode.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\html\htmlWorker.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\json\jsonMode.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\json\jsonWorker.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\typescript\lib\typescriptServices.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\typescript\src\mode.js" />
+    <Content Include="Content\monaco-editor\dev\vs\language\typescript\src\worker.js" />
+    <Content Include="Content\monaco-editor\dev\vs\loader.js" />
+    <Content Include="Content\monaco-editor\min\vs\base\worker\workerMain.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\bat.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\coffee.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\cpp.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\csharp.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\css.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\dockerfile.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\fsharp.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\go.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\handlebars.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\html.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\ini.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\java.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\less.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\lua.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\markdown.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\msdax.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\objective-c.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\php.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\postiats.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\powershell.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\pug.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\python.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\r.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\razor.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\ruby.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\sb.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\scss.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\solidity.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\sql.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\swift.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\vb.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\xml.js" />
+    <Content Include="Content\monaco-editor\min\vs\basic-languages\src\yaml.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_16x.svg" />
+    <Content Include="Content\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_inverse_16x.svg" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.css" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.de.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.es.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.fr.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.hu.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.it.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.ja.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.ko.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.pt-br.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.ru.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.tr.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.zh-cn.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\editor.main.nls.zh-tw.js" />
+    <Content Include="Content\monaco-editor\min\vs\editor\standalone\browser\quickOpen\symbol-sprite.svg" />
+    <Content Include="Content\monaco-editor\min\vs\language\css\cssMode.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\css\cssWorker.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\html\htmlMode.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\html\htmlWorker.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\json\jsonMode.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\json\jsonWorker.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\typescript\lib\typescriptServices.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\typescript\src\mode.js" />
+    <Content Include="Content\monaco-editor\min\vs\language\typescript\src\worker.js" />
+    <Content Include="Content\monaco-editor\min\vs\loader.js" />
+    <Content Include="Content\monaco-editor\ThirdPartyNotices.txt" />
+    <Content Include="Scripts\libs\jquery.min.js" />
+    <Content Include="Scripts\ui.js" />
+    <Content Include="Scripts\utils.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Content\monaco-editor\CHANGELOG.md" />
+    <Content Include="Content\monaco-editor\dev\bundleInfo.json" />
+    <Content Include="Content\monaco-editor\dev\nls.metadata.json" />
+    <Content Include="Content\monaco-editor\dev\vs\base\worker\workerMain.js.map" />
+    <Content Include="Content\monaco-editor\dev\vs\editor\editor.main.js.map" />
+    <Content Include="Content\monaco-editor\dev\vs\loader.js.map" />
+    <Content Include="Content\monaco-editor\LICENSE" />
+    <Content Include="Content\monaco-editor\min-maps\vs\base\worker\workerMain.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.es.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.fr.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.hu.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.it.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.ja.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.ko.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.pt-br.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.ru.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.tr.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-cn.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-tw.js.map" />
+    <Content Include="Content\monaco-editor\min-maps\vs\loader.js.map" />
+    <Content Include="Content\monaco-editor\package.json" />
+    <Content Include="Content\monaco-editor\README.md" />
+    <Content Include="Content\ASPNetSpellInclude\.DS_Store" />
+    <Content Include="Content\ASPNetSpellInclude\core\.DS_Store" />
+    <Content Include="Content\ASPNetSpellInclude\core\default.ashx" />
+    <Content Include="Content\ASPNetSpellInclude\core\Default.aspx" />
+    <Content Include="Content\ASPNetSpellInclude\core\dialog.js" />
+    <Content Include="Content\ASPNetSpellInclude\debugging-test-scripts\Hello-World.aspx" />
+    <Content Include="Content\ASPNetSpellInclude\debugging-test-scripts\support.txt" />
+    <Content Include="Content\ASPNetSpellInclude\debugging-test-scripts\Test-Instalation.ashx" />
+    <Content Include="Content\ASPNetSpellInclude\debugging-test-scripts\Test-Server-Ajax.aspx" />
+    <Content Include="Content\ASPNetSpellInclude\dialog.html" />
+    <Content Include="Content\ASPNetSpellInclude\dictionaries\.DS_Store" />
+    <Content Include="Content\ASPNetSpellInclude\dictionaries\custom.txt" />
+    <Content Include="Content\ASPNetSpellInclude\dictionaries\English %28International%29.dic" />
+    <Content Include="Content\ASPNetSpellInclude\dictionaries\language-rules\banned-words.txt" />
+    <Content Include="Content\ASPNetSpellInclude\dictionaries\language-rules\common-mistakes.txt" />
+    <Content Include="Content\ASPNetSpellInclude\dictionaries\language-rules\enforced-corrections.txt" />
+    <Content Include="Content\ASPNetSpellInclude\dictionaries\README.txt" />
+    <Content Include="Content\ASPNetSpellInclude\include.js" />
+    <Content Include="Content\ASPNetSpellInclude\license.txt" />
+    <Content Include="Content\ASPNetSpellInclude\support.txt" />
+    <Content Include="Content\ASPNetSpellInclude\themes\.DS_Store" />
+    <Content Include="Content\ASPNetSpellInclude\themes\bright\ajax-loader.gif" />
+    <Content Include="Content\ASPNetSpellInclude\themes\bright\context-menu.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\bright\dialog-window.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\bright\ieonly.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\buttons\spellicon.gif" />
+    <Content Include="Content\ASPNetSpellInclude\themes\buttons\spelliconover.gif" />
+    <Content Include="Content\ASPNetSpellInclude\themes\classic\.DS_Store" />
+    <Content Include="Content\ASPNetSpellInclude\themes\classic\ajax-loader.gif" />
+    <Content Include="Content\ASPNetSpellInclude\themes\classic\context-menu.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\classic\dialog-window.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\classic\gwiggle.png" />
+    <Content Include="Content\ASPNetSpellInclude\themes\classic\ieonly.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\classic\wiggle.png" />
+    <Content Include="Content\ASPNetSpellInclude\themes\clean\.DS_Store" />
+    <Content Include="Content\ASPNetSpellInclude\themes\clean\ajax-loader.gif" />
+    <Content Include="Content\ASPNetSpellInclude\themes\clean\context-menu.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\clean\dialog-window.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\clean\gwiggle.png" />
+    <Content Include="Content\ASPNetSpellInclude\themes\clean\ieonly.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\clean\wiggle.png" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\.DS_Store" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\ajax-loader.gif" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\context-menu.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\dialog-window.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\gwiggle.png" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\ieonly.css" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\wiggle.png" />
+    <Content Include="Content\ASPNetSpellInclude\themes\modern\xp.gif" />
+    <Content Include="Content\ASPNetSpellInclude\translations\af.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ar.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\be.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\bg.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ca.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\cn.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\cs.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\cy.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\da.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\de.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\el.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\en.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\es.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\et.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\fa.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\fi.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\fr.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ga.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\gl.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\hi.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\hr.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\hu.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\id.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\is.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\it.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\iw.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ja.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ko.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\lt.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\lv.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\mk.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ms.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\mt.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\nl.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\no.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\pl.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\pt.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ro.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\ru.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\simple.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\sk.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\sl.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\sq.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\sr.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\sw.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\template.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\th.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\tl.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\tr.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\tw.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\uk.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\vi.js" />
+    <Content Include="Content\ASPNetSpellInclude\translations\yi.js" />
+    <Content Include="Content\ASPNetSpellInclude\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Views\Home\compose.cshtml" />
+    <None Include="Properties\PublishProfiles\EasyMail20171212074520 - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Content\monaco-editor\monaco.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3763</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3763/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
