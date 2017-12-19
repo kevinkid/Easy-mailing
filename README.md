@@ -5,3 +5,6 @@ Productivity outlook addin AspNet backend server.
 
 #### demo
 [demo](https://proxy-service20171106124327.herokuapp.com/)
+
+###### Addin manifest url
+[Manifest url](https://github.com/kevinkid/Easy-mailing/addin-manifest/AppointmentManagerManifest.xml)
