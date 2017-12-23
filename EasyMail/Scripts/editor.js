@@ -111,15 +111,7 @@ As long as I am healthy, I値l work hard to earn as much money as I can, then wit
 			line.number + 1,
 			endColumn + 1
 		)
-		const endingRange = new monaco.Range(
-			line.number + 1,
-			startColumn + selected.length + 1,
-			line.number + 1,
-			startColumn + selected.length + 1
-		)
 		this.insertSuggestion({ range: range, word: selected })
-		this.setSelection(endingRange)
-		this.hideSuggestions()
 	}
 
 	/**
@@ -147,17 +139,32 @@ As long as I am healthy, I値l work hard to earn as much money as I can, then wit
 		)
 	}
 
+	onExecutedEdits(text, { startColumn }) {
+		var line = this.cursorPosition()
+		// Note that instead of seting a selection we can set cursor position 
+		const endingRange = new monaco.Range(
+			line.number + 1,
+			startColumn + text.length + 1,
+			line.number + 1,
+			startColumn + text.length + 1
+		)
+		this.setSelection(endingRange)
+		this.hideSuggestions()
+	}
+
     /**
      * Inserts suggestions in the current cursor position
      * @param {object} suggestion 
      */
 	insertSuggestion(suggestion) {
+		// NOTE: Make sure that the executeedits method gets called minimal times 
 		this.clearErrors([{ range: suggestion.range }])
 		this.lastErrorRange = suggestion.range;
 		this.editor.executeEdits('', [{
 			range: suggestion.range,
 			text: suggestion.word + ' '
 		}])
+		this.onExecutedEdits(suggestion.word, suggestion.range)
 	}
 
 	cursorPosition() {
@@ -187,7 +194,6 @@ As long as I am healthy, I値l work hard to earn as much money as I can, then wit
 
 	highlightSpellErrors(errors) {
 		// Note this decorations migt be happening more than once .
-		debugger; //<debug> Make sure the error highliting does not remove the selection highliting </debug>
 		const decorationList = [];
 		this.spellErrors = this.spellErrors.length > 0 ? this.spellErrors.concut(errors) : [];
 		errors.forEach(function (error) {
@@ -217,20 +223,25 @@ As long as I am healthy, I値l work hard to earn as much money as I can, then wit
 	}
 
 	clearErrors(errors) {
-		// Note after the insertion has happened remove the decoration, it might be causing the error in the cursor.
-		// errors.ts:84 Uncaught Error: Cannot read property 'color' of undefined
 		errors.forEach(error => {
 
-			Object.keys(this.editor.model._decorations).forEach(id => {
-				debugger; // <debug> clear errors in range  </debug>
-
-				var decoration = this.editor.model._decorations[id];
+			Object.keys(this.editor.model._decorations).forEach(decorationId => {
+				
+				var decoration = this.editor.model._decorations[decorationId];
 				var decorationRange = decoration.range;
 
-				if (decorationRange.startingColumn === error.range.startingColumn &&
-					decorationRange.endColumn === error.range.endColumn) {
 
-					editor.editor.model._decorations[id].options = { stickiness: false };
+				if (decorationRange.startColumn === decorationRange.endColumn) {
+					this.lastErrorRange = decorationRange;
+					editor.editor.model._decorations[decorationId].options = { stickiness: false };
+				}
+
+				if ((decorationRange.startColumn > error.range.startColumn - 5 &&
+					decorationRange.startColumn < error.range.startColumn + 5) &&
+					(decorationRange.endColumn < error.range.endColumn + 5 &&
+						decorationRange.endColumn > error.range.endColumn - 5)) {
+
+					editor.editor.model._decorations[decorationId].options = { stickiness: false };
 				}
 			})
 		})
@@ -240,21 +251,37 @@ As long as I am healthy, I値l work hard to earn as much money as I can, then wit
 	 * Clear monaco decorations for cleared errors
 	 */
 	deleteClearedErrors() {
+		var range = this.lastErrorRange; // NOTE: That this assumes that the last error is the only error there is. Use errors an search through all of them.
+		var matchedErrors = 0;
+		Object.keys(this.editor.model._decorations).forEach(decorationId => {
 
-		var range = this.lastErrorRange;
-
-		Object.keys(this.editor.model._decorations).forEach(id => {
-
-			var decoration = this.editor.model._decorations[id];
+			var decoration = this.editor.model._decorations[decorationId];
 			var decorationRange = decoration.range;
 
-			if (decorationRange.startingColumn === range.startingColumn &&
-				decorationRange.endColumn === range.endColumn) {
+			// Note that error decorations range changes with edits, find a way to clear the decorations for the whole word in new range.
+			// The best way to go about this is to remove decorations as long as they are in range before we can find a better solution.
+			// TODO: Find a way to update errors on each error edits, this way to can remove the decorations effectively.
+			// You can use the edits range to check whether an error is being updated and then update it according to the insertions/extractions 
+			if ((decorationRange.startColumn > range.startColumn - 5 &&
+				decorationRange.startColumn < range.startColumn + 5) &&
+				(decorationRange.endColumn < range.endColumn + 5 &&
+					decorationRange.endColumn > range.endColumn - 5)) {
 
-				delete editor.editor.model._decorations[id];
+				delete editor.editor.model._decorations[decorationId];
+				++matchedErrors;
 			}
 		})
-		this.lastErrorRange = null;
+		matchedErrors != 0 ?
+			this.lastErrorRange = null :
+			false;
+	}
+
+	/**
+	 * Upate error decoration ranges ,edits happening before the
+	 *  range affect the position of the error
+	 */
+	updateErrors(newRange) {
+
 	}
 
 	getCusorPosition(parentEl) {
@@ -278,12 +305,16 @@ As long as I am healthy, I値l work hard to earn as much money as I can, then wit
 		return activeLines[0]
 	}
 
+	suggestionsHidden() {
+		return this.suggestionPopup.css('display') === 'none';
+	}
+
 	repositionSuggestion() {
 		var winWidth = window.outerWidth;
 		var popupWidth = this.suggestionPopup.css('width').remove('px');
 		var pos = editor.getCusorPosition();
 		(parseInt(popupWidth) + pos.left) > winWidth + 200 ?
-			pos.left = winWidth - (parseInt(popupWidth) - 250) : null;
+			pos.left = winWidth - (parseInt(popupWidth) - 200) : null;
 		this.suggestionPopup.css('top', pos.top);
 		this.suggestionPopup.css('left', pos.left + 'px');
 	}
@@ -293,6 +324,7 @@ As long as I am healthy, I値l work hard to earn as much money as I can, then wit
 	}
 
 	showSuggestions() {
+		//debugger;// <debug> Only show suggestions if there are some in scope </debug>
 		this.repositionSuggestion();
 		clearTimeout(self.typingTimeout);
 		self.typingTimeout = setTimeout(() => {

@@ -38,26 +38,29 @@
 		var sentenceTerminatorRegx = /[.|?|!].*[a-z].*$/gmi; // @BUG: This doesn't check for words that contain heiphen eg. work-out.
 		var dblSpaceRegx = /\s\s/gmi;//  Note that this is not effective because of words in the middle
 
-		if (lastPhrase.isWord()) {
-
+		if (lastPhrase.isWord() && lastPhrase.length > 3) {
+			
 			var range = editor.editsRange();
 
 			spellChecker(lastPhrase, function (suggestions) {
-				var bestMatches = suggestions.filter(s => s.contains('\'', ' ') && s.replace(/\'|\s/gm, '') === lastPhrase);
+				var bestMatches = suggestions.filter(s => s.contains('\'', ' ') && s.remove(/\'|\s/gm) === lastPhrase);
 				if (bestMatches.length >= 1) {
 					validateBeforeEdits(lastPhrase, { word: bestMatches[0], range: range })
 				} else {
 					if (suggestions[0] != lastPhrase && suggestions.length > 0) {
 						if (suggestions.length > 2 && !line.text.contains(dblSpaceRegx)) {
 							range.endColumn = range.endColumn - 1;
-							callback({ suggestions: suggestions, range: range, text: lastPhrase })// TODO: Fix highlighting errors
-						} else if (suggestions.length === 1 && (line.fullText.words().length === 1 || sentenceTerminatorRegx.test(line.text))) {
+							callback({ suggestions: suggestions, range: range, text: lastPhrase })
+						} else if (suggestions.length === 1 && (line.fullText.words().length === 1 || sentenceTerminatorRegx.test(line.text))) { //  TODO: Make sure this sentence terminator works.
 							validateBeforeEdits(lastPhrase, { word: suggestions[0].capitalize(), range: range })
 						} else if (suggestions.length === 1) {
 							validateBeforeEdits(lastPhrase, { word: suggestions[0], range: range })
 						}
 					} else {
 						if (suggestions[0] === lastPhrase) {
+							range.endColumn = range.endColumn + 1;
+							editor.clearErrors([{ range: range }]);
+							editor.lastErrorRange = range;
 							if (line.fullText.words().length === 1) {
 								validateBeforeEdits(lastPhrase, { word: lastPhrase.capitalize(), range: range })
 							} else {
@@ -67,7 +70,7 @@
 							}
 						} else callback(false)
 					}
-					if (suggestions.length < 1 && (line.fullText.words().length === 1 || sentenceTerminatorRegx.test(line.text))) {
+					if (suggestions.length < 1 && (line.fullText.words().length === 1 || sentenceTerminatorRegx.test(line.text))) { // TODO: Make sure this sentence terminator works.
 						validateBeforeEdits(lastPhrase, { word: lastPhrase.capitalize(), range: range })
 					}
 				}
@@ -102,8 +105,10 @@
 		mutations.forEach(function (mutation) {
 			if (mutation.type === 'childList') {
 
-				if (editor.editor.lastErrorRange != null) {
-					editor.editor.deleteClearedErrors()
+				if (editor.lastErrorRange != null) {
+					// This is being executed immediately after the insertion, making it hard for 
+					// for me to tell when the last range has changed.
+					editor.deleteClearedErrors()
 				}
 
 				var terminator = termination(mutation);
@@ -121,10 +126,20 @@
 					return;
 				} else {
 					var phrase = editor.currentPhrase(mutation);
-					if (phrase == null | undefined | phrase.null()) { return }
+					if (phrase == null | undefined && phrase == phrase.null()) { return }
+
+					// Note that now we are making server requests on user edits .
+					spellChecker(phrase, function (suggestions) {
+						if (suggestions[0] === phrase) {
+							var range = editor.editsRange()
+							editor.clearErrors([{ range: range }]);
+							editor.lastErrorRange = range;
+						}
+					})
+
 					self.suggestionsTimeout = setTimeout(function () {
 						spellChecker(phrase, function (suggestions) {
-							if (suggestions && suggestions.length != 0) {
+							if (suggestions && suggestions.length != 0 && !suggestions.hasNullables()) {
 								$scope.suggestions = suggestions;
 								$scope.$apply()
 								editor.showSuggestions(phrase);
@@ -155,12 +170,21 @@
 		} else {
 			// numeric keys
 			if (eve.keyCode > 20 && eve.keyCode < 30) {
-				var suggestionsHidden = $('.suggestionPopup').css('display') === 'none';
+
+				var suggestionsHidden = editor.suggestionsHidden();
+
 				if (!suggestionsHidden) {
+
 					var range = editor.editsRange();
-					var word = $scope.suggestions[parseInt(eve.browserEvent.key) - 1];
+					var index = (parseInt(eve.browserEvent.key) - 1);
+
+					if (typeof $scope.suggestions[index] == 'undefined') {
+						return;
+					}
+
+					var word = $scope.suggestions[index];
 					editor.insertSuggestion({
-						range: range, 
+						range: range,
 						word: word
 					})
 				}
@@ -204,7 +228,8 @@
 	}
 
 	function loaded() {
-		$('.suggestionPopup').on('click', ev => editor.onSuggestionClick(ev));
+		$('.suggestionPopup').on('click', ev => $(ev.target).hasClass('ms-Icon') ?
+			false : editor.onSuggestionClick(ev));
 		$(window).on('message', onMessage);
 	}
 

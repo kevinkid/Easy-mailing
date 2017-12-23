@@ -7,7 +7,7 @@ String.prototype.contains = function (..._args) {
 	var results = new Array();
 	var _str = this.toString();
 	if (_str.length < 1 && _args.length < 1) return;
-	_args.forEach(char => results.push(_str.search(char) > 0))
+	_args.forEach(char => results.push(_str.search(char) >= 0))
 	return results.includes(true);
 }
 String.prototype.sentences = function () {
@@ -66,4 +66,27 @@ String.prototype.sentenceTerminator = function () {
 // piece of string contains a word terminating character
 String.prototype.wordTerminator = function () {
 	return /[a-z]+-[a-z|!\s]+|[a-z]+[\s]$/gmi.test(this.toString());
+}
+String.prototype.hasSpecialCharacters = function () {
+	return this.toString().contains()
+}
+// @returns {boolean} - if the array is empty
+Array.prototype.empty = function () {
+	return this.length < 1;
+}
+// An array contains string data that are not english words
+Array.prototype.hasNullables = function () {
+	var _thisAr = this;
+	if (_thisAr.length > 0) {
+		return _thisAr.filter(el => {
+			var _matchedAr = el.toString().match(/^[a-z]+-[a-z]|^[a-z]+$/gmi)
+			if (_matchedAr) {
+				return true;
+			} else {
+				return false;
+			}
+		}).empty();
+	} else {
+		return true;
+	}
 }

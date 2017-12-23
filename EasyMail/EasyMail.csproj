@@ -314,6 +314,7 @@
     <Content Include="Scripts\libs\jquery.min.js" />
     <Content Include="Scripts\ui.js" />
     <Content Include="Scripts\utils.js" />
+    <Content Include="TODO.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
